@@ -1,4 +1,5 @@
 import requests
+import json
 
 
 def get_data(start_date, end_date):
@@ -11,19 +12,11 @@ def get_data(start_date, end_date):
     else:
         print(f"Запрос выполнен не успешно. {response.status_code}")
         exit(400)
-    print()
+    text = response.text
+    data = json.loads(text)
+    return data['quotes']
 
-# url = "https://api.apilayer.com/currency_data/timeframe?start_date=2022-01-08&end_date=2022-04-0310"
-#
-# payload = {}
-# headers= {
-#   "apikey": "8nOp4eBHO7jSOj7BylImI0OEPHGaEp4t"
-# }
-# response = requests.request("GET", url, headers=headers, data = payload)
-#
-# status_code = response.status_code
-# result = response.text
 if __name__ == '__main__':
     result = {}
-    get_data(start_date='2022-01-08', end_date='2022-04-03')
+    quotes = get_data(start_date='2022-07-01', end_date='2022-08-01')
     print()
